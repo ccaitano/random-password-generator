@@ -44,13 +44,15 @@ function generatePassword() {
     charTypeArray.push(lowerChar);
   }
   console.log(countType);
+  
   for (var inc = 0; inc < countType; inc++){
     incChar[inc] = true;
   }
-  console.log(incChar);
+
   for (var i = 0; i < passwordLength; i++) {
     //Determines type of random character based on user input
-    var charType = Math.floor(Math.random() * (countType-1));
+    var charType = Math.floor(Math.random() * (countType));
+    console.log(charType);
     if ((incChar[charType] == true) || (passwordLength > countType)){
     //Determines random character from specified type array
     console.log(countType);
@@ -70,10 +72,10 @@ function generatePassword() {
   console.log(passwordString)
 
   //Validate password meets criteria
-  // if (!passwordArray.includes()){
-  //   alert("Please provide a value between 8 and 128");
-  //   return;
-  // }
+  if (!passwordArray.includes()){
+    alert("Please provide a value between 8 and 128");
+    return;
+  }
 
   //Password displayed to page
   return passwordString;
