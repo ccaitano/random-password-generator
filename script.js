@@ -53,14 +53,13 @@ function generatePassword() {
   console.log(passwordString)
 
   //Validate password meets criteria
-  if (!passwordArray.includes()){
-    alert("Please provide a value between 8 and 128");
-    return;
-  }
+  // if (!passwordArray.includes()){
+  //   alert("Please provide a value between 8 and 128");
+  //   return;
+  // }
+  
   //Password displayed to page
-
-
-  return;
+  return passwordString;
 }
 
 // Get references to the #generate element
