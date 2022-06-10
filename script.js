@@ -6,6 +6,7 @@ function generatePassword() {
   var lowerChar = ["a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z"];
   var upperChar = ["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"];
   var charTypeArray = [];
+  var incChar = [];
   var passwordArray = [];
   var countType = 0;
 
@@ -42,12 +43,28 @@ function generatePassword() {
     countType++
     charTypeArray.push(lowerChar);
   }
-
-  for (var i = 0; i <= passwordLength; i++) {
-    var charType = Math.floor(Math.random() * (countType-1));
-    randomChar = Math.floor(Math.random() * (charTypeArray[charType].length-1));
-    passwordArray.push(charTypeArray[charType][randomChar]);
+  console.log(countType);
+  for (var inc = 0; inc < countType; inc++){
+    incChar[inc] = true;
   }
+  console.log(incChar);
+  for (var i = 0; i < passwordLength; i++) {
+    //Determines type of random character based on user input
+    var charType = Math.floor(Math.random() * (countType-1));
+    if ((incChar[charType] == true) || (passwordLength > countType)){
+    //Determines random character from specified type array
+    console.log(countType);
+    randomChar = Math.floor(Math.random() * (charTypeArray[charType].length-1));
+    //Builds password character by character
+    passwordArray.push(charTypeArray[charType][randomChar]);
+    incChar[charType] = false;
+    console.log(incChar);
+    } else {
+      i--;
+      console.log(error);
+    }
+    }
+
 
   passwordString = passwordArray.join("");
   console.log(passwordString)
@@ -57,7 +74,7 @@ function generatePassword() {
   //   alert("Please provide a value between 8 and 128");
   //   return;
   // }
-  
+
   //Password displayed to page
   return passwordString;
 }
