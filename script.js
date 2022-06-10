@@ -5,9 +5,11 @@ function generatePassword() {
   var specialChar = ["~","!","@","#","$","%","^","&","*","+","?"];
   var lowerChar = ["a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z"];
   var upperChar = ["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"];
+  var charTypeArray = [];
   var passwordArray = [];
+  var countType = 0;
 
-  //Prompt user for length of the password
+  //Prompt user for length of the password with default value of 8
   var passwordLength = prompt("Please choose a password length between 8 and 128 characters", "8");
   
   //Validate length of password between 8-128 characters
@@ -15,6 +17,7 @@ function generatePassword() {
     alert("Please provide a value between 8 and 128");
     return;
   }
+
   //Prompt user for password criteria
   var incNumbers = confirm("Do you want to include numbers?");
   var incSpecChar = confirm("Do you want to include special characters?");
@@ -22,30 +25,38 @@ function generatePassword() {
   var incLower = confirm("Do you want to include lowercase characters?");
 
   //Password generation
-  
-  for (var i = 0; i <= passwordLength; i++) {
-    var charType = Math.floor(Math.random() * 4);
-    console.log(i);
-    if (charType === 0) {
-      var randomChar = Math.floor(Math.random() * 10);
-      passwordArray.push(numbers[randomChar]);
-    } else if (charType === 1) {
-      var randomChar = Math.floor(Math.random() * 11);
-      passwordArray.push(specialChar[randomChar]);
-    } else if (charType === 2) {
-      var randomChar = Math.floor(Math.random() * 27);
-      passwordArray.push(lowerChar[randomChar]);
-    }
-    else if (charType === 3) {
-      var randomChar = Math.floor(Math.random() * 27);
-      passwordArray.push(upperChar[randomChar]);
-    }
+  //Get required characters from user input
+  if (incNumbers) {
+    countType++;
+    charTypeArray.push(numbers);
   }
-  console.log(passwordArray);
-  passwordString = passwordArray.join("");
-  console.log(passwordString);
-  //Validate password meets criteria
+  if (incSpecChar) {
+    countType++;
+    charTypeArray.push(specialChar);
+  }
+  if (incUpper) {
+    countType++;
+    charTypeArray.push(upperChar);
+  }
+  if (incLower) {
+    countType++
+    charTypeArray.push(lowerChar);
+  }
 
+  for (var i = 0; i <= passwordLength; i++) {
+    var charType = Math.floor(Math.random() * (countType-1));
+    randomChar = Math.floor(Math.random() * (charTypeArray[charType].length-1));
+    passwordArray.push(charTypeArray[charType][randomChar]);
+  }
+
+  passwordString = passwordArray.join("");
+  console.log(passwordString)
+
+  //Validate password meets criteria
+  if (!passwordArray.includes()){
+    alert("Please provide a value between 8 and 128");
+    return;
+  }
   //Password displayed to page
 
 
