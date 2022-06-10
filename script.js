@@ -7,7 +7,12 @@ function generatePassword() {
   var upperChar = ["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"];
 
   //Prompt user for length of the password
-  prompt("Please choose a password length between 8 and 128 characters", "8");
+  var passwordLength = prompt("Please choose a password length between 8 and 128 characters", "8");
+  if (passwordLength<8 || passwordLength>129){
+    alert("Please provide a value between 8 and 128");
+    return;
+  }
+  //Validate length of password between 8-128 characters
 
   //User selects password length
 
