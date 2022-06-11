@@ -15,7 +15,7 @@ function generatePassword() {
   var passwordLength = prompt("Please choose a password length between 8 and 128 characters", "8");
   
   //Validate length of password between 8-128 characters
-  if (passwordLength<8 || passwordLength>129){
+  if (passwordLength<8 || passwordLength>128){
     alert("Please provide a value between 8 and 128");
     return;
   }
@@ -44,7 +44,6 @@ function generatePassword() {
     countType++
     charTypeArray.push(lowerChar);
   }
-  console.log(countType);
   
   //Array to help ensure each requested type is used
   for (var inc = 0; inc < countType; inc++){
@@ -54,21 +53,20 @@ function generatePassword() {
   for (var i = 0; i < passwordLength; i++) {
     //Determines type of random character based on user input
     var charType = Math.floor(Math.random() * (countType));
-    // if ((incChar[charType] == true) || (passwordLength > countType)){
-    //Determines random character from specified type array
-    randomChar = Math.floor(Math.random() * (charTypeArray[charType].length-1));
-    //Builds password character by character
-    passwordArray.push(charTypeArray[charType][randomChar]);
-    incChar[charType] = false;
-    // } else {
-    //   i--;
-    // }
+    //Checks to see if user's selected character type has been used yet otherwise chooses one that has yet to be used first
+    if ((incChar[charType] == true) || (passwordLength > countType)){
+      //Determines random character from specified type array
+      randomChar = Math.floor(Math.random() * (charTypeArray[charType].length-1));
+      //Builds password character by character
+      passwordArray.push(charTypeArray[charType][randomChar]);
+      incChar[charType] = false;
+    } else {
+      i--;
     }
+  }
 
-
+  //Changes password from array format to string format
   passwordString = passwordArray.join("");
-  console.log(passwordArray);
-  console.log(passwordString);
 
   // Validate password meets criteria
   if (incNumbers && !passwordArray.some(item => numbers.includes(item))){
@@ -87,8 +85,7 @@ function generatePassword() {
     alert("Your password does not contain a uppercase character!");
     return;
   }
-  
-  //Password displayed to page
+
   return passwordString;
 }
 
