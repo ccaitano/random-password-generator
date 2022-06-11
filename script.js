@@ -1,6 +1,7 @@
 // Assignment code here
 
 function generatePassword() {
+  //Declare Variables
   var numbers = ["0","1","2","3","4","5","6","7","8","9"];
   var specialChar = ["~","!","@","#","$","%","^","&","*","+","?"];
   var lowerChar = ["a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z"];
@@ -45,6 +46,7 @@ function generatePassword() {
   }
   console.log(countType);
   
+  //Array to help ensure each requested type is used
   for (var inc = 0; inc < countType; inc++){
     incChar[inc] = true;
   }
@@ -52,31 +54,40 @@ function generatePassword() {
   for (var i = 0; i < passwordLength; i++) {
     //Determines type of random character based on user input
     var charType = Math.floor(Math.random() * (countType));
-    console.log(charType);
-    if ((incChar[charType] == true) || (passwordLength > countType)){
+    // if ((incChar[charType] == true) || (passwordLength > countType)){
     //Determines random character from specified type array
-    console.log(countType);
     randomChar = Math.floor(Math.random() * (charTypeArray[charType].length-1));
     //Builds password character by character
     passwordArray.push(charTypeArray[charType][randomChar]);
     incChar[charType] = false;
-    console.log(incChar);
-    } else {
-      i--;
-      console.log(error);
-    }
+    // } else {
+    //   i--;
+    // }
     }
 
 
   passwordString = passwordArray.join("");
-  console.log(passwordString)
+  console.log(passwordArray);
+  console.log(passwordString);
 
-  //Validate password meets criteria
-  if (!passwordArray.includes()){
-    alert("Please provide a value between 8 and 128");
+  // Validate password meets criteria
+  if (incNumbers && !passwordArray.some(item => numbers.includes(item))){
+    alert("Your password does not contain a number!");
     return;
   }
-
+  if (incSpecChar && !passwordArray.some(item => specialChar.includes(item))){
+    alert("Your password does not contain a special character!");
+    return;
+  }
+  if (incLower && !passwordArray.some(item => lowerChar.includes(item))){
+    alert("Your password does not contain a lowercase character!");
+    return;
+  }
+  if (incUpper && !passwordArray.some(item => upperChar.includes(item))){
+    alert("Your password does not contain a uppercase character!");
+    return;
+  }
+  
   //Password displayed to page
   return passwordString;
 }
