@@ -10,12 +10,12 @@ Generates a user's password based on selected criteria
 
 ### General Info
 
-This program generates a random password varying in length and types of characters based on the user's selection. Types of characters can be numbers, special characters, lowercase letters, and/or uppercase characters.
+This program generates a random password varying in length and types of characters based on the user's selections. Types of characters can be numbers, special characters, lowercase letters, and/or uppercase characters. Password length must be between 8 and 128 characters long.
 
 #### Screenshots
 
 Main Page:
-<img src="./assets.images/screenshot.jpg" alt="Password Generator Main Screen"/>
+<img src="./assets/images/screenshot.jpg" alt="Password Generator Main Screen"/>
 
 ### Technologies Used
 
