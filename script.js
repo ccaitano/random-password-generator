@@ -30,19 +30,19 @@ function generatePassword() {
   //Get required characters from user input
   if (incNumbers) {
     countType++;
-    charTypeArray.push(numbers);
+    charTypeArray = charTypeArray.concat(numbers);
   }
   if (incSpecChar) {
     countType++;
-    charTypeArray.push(specialChar);
+    charTypeArray = charTypeArray.concat(specialChar);
   }
   if (incUpper) {
     countType++;
-    charTypeArray.push(upperChar);
+    charTypeArray = charTypeArray.concat(upperChar);
   }
   if (incLower) {
     countType++
-    charTypeArray.push(lowerChar);
+    charTypeArray = charTypeArray.concat(lowerChar);
   }
   
   //Array to help ensure each requested type is used
@@ -50,15 +50,16 @@ function generatePassword() {
     incChar[inc] = true;
   }
 
+  console.log(charTypeArray.length);
   for (var i = 0; i < passwordLength; i++) {
     //Determines type of random character based on user input
-    var charType = Math.floor(Math.random() * (countType));
+    var charType = Math.floor(Math.random() * countType);
     //Checks to see if user's selected character type has been used yet otherwise chooses one that has yet to be used first
     if ((incChar[charType] == true) || (passwordLength > countType)){
       //Determines random character from specified type array
-      randomChar = Math.floor(Math.random() * (charTypeArray[charType].length-1));
+      randomChar = Math.floor(Math.random() * (charTypeArray.length-1));
       //Builds password character by character
-      passwordArray.push(charTypeArray[charType][randomChar]);
+      passwordArray = passwordArray.concat(charTypeArray[randomChar]);
       incChar[charType] = false;
     } else {
       i--;
@@ -69,6 +70,14 @@ function generatePassword() {
   passwordString = passwordArray.join("");
 
   // Validate password meets criteria
+  if (countType == 0) {
+    alert("Must select at least one character type!");
+    return;
+  }
+  // if (incNumbers && !passwordArray.includes(numbers)){
+  //   alert("Your password does not contain a number!");
+  //   return;
+  // }
   if (incNumbers && !passwordArray.some(item => numbers.includes(item))){
     alert("Your password does not contain a number!");
     return;
