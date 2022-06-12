@@ -21,10 +21,10 @@ function generatePassword() {
   }
 
   //Prompt user for password criteria
-  var incNumbers = confirm("Do you want to include numbers?");
-  var incSpecChar = confirm("Do you want to include special characters?");
-  var incUpper = confirm("Do you want to include uppercase characters?");
-  var incLower = confirm("Do you want to include lowercase characters?");
+  var incNumbers = confirm("Select 'OK' to include numerical characters?");
+  var incSpecChar = confirm("Select 'OK' to include special characters?");
+  var incUpper = confirm("Select 'OK' to include uppercase characters?");
+  var incLower = confirm("Select 'OK' to include lowercase characters?");
 
   //Password generation
   //Get required characters from user input
@@ -50,7 +50,6 @@ function generatePassword() {
     incChar[inc] = true;
   }
 
-  console.log(charTypeArray.length);
   for (var i = 0; i < passwordLength; i++) {
     //Determines type of random character based on user input
     var charType = Math.floor(Math.random() * countType);
