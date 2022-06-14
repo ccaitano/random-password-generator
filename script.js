@@ -44,25 +44,14 @@ function generatePassword() {
     countType++
     charTypeArray = charTypeArray.concat(lowerChar);
   }
-  
-  //Array to help ensure each requested type is used
-  for (var inc = 0; inc < countType; inc++){
-    incChar[inc] = true;
-  }
 
   for (var i = 0; i < passwordLength; i++) {
     //Determines type of random character based on user input
     var charType = Math.floor(Math.random() * countType);
-    //Checks to see if user's selected character type has been used yet otherwise chooses one that has yet to be used first
-    if ((incChar[charType] == true) || (passwordLength > countType)){
-      //Determines random character from specified type array
-      randomChar = Math.floor(Math.random() * (charTypeArray.length-1));
-      //Builds password character by character
-      passwordArray = passwordArray.concat(charTypeArray[randomChar]);
-      incChar[charType] = false;
-    } else {
-      i--;
-    }
+    //Determines random character from specified type array
+    randomChar = Math.floor(Math.random() * (charTypeArray.length-1));
+    //Builds password character by character
+    passwordArray = passwordArray.concat(charTypeArray[randomChar]);
   }
 
   //Changes password from array format to string format
@@ -73,10 +62,6 @@ function generatePassword() {
     alert("Must select at least one character type!");
     return;
   }
-  // if (incNumbers && !passwordArray.includes(numbers)){
-  //   alert("Your password does not contain a number!");
-  //   return;
-  // }
   if (incNumbers && !passwordArray.some(item => numbers.includes(item))){
     alert("Your password does not contain a number!");
     return;
